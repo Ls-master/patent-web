@@ -3,9 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import './utils';
 import 'normalize.css';
 
+import _ from 'lodash';
 import ElementUI from 'element-ui'
 
 Vue.use(ElementUI);
