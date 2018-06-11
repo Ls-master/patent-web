@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div class="app-left">
+    <!-- <div class="app-left">
       <left-menu />
-    </div>
+    </div> -->
 
     <div class="app-right">
       <router-view/>
@@ -16,7 +16,7 @@ import LeftMenu from './components/LeftMenu.vue';
 export default {
   name: 'App',
   components: {
-    LeftMenu
+    LeftMenu,
   }
 }
 </script>
@@ -33,6 +33,7 @@ export default {
   }
   .app-right {
     flex: 1;
+    padding: 20px;
   }
 }
 </style>
