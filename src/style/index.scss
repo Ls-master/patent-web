@@ -1,0 +1,15 @@
+/* 误删 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+@import "~element-ui/packages/theme-chalk/src/index";
+@import "./mixin";
+@import "./element-ui/index.scss";
+
+html {
+	background-color: $themeGrayColor;
+	-webkit-text-size-adjust: 100%;
+  line-height: 1;
+}
+
+html, body, #app {
+	height: 100%;
+}

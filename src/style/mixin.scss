@@ -1,0 +1,107 @@
+
+
+$themeColor: #8C6CF5; // 主题颜色风格
+$themeGrayColor: #F6F7FB; // 统一灰色掉
+$borderColor: #E4E7ED; // 边框颜色
+$bgColor: #FFFFFF;
+$titleColor: #2E3242;
+$shadowColor:rgba(193,201,214,0.50);
+
+$maxIndex: 29;
+$minHeight: 600px; // 最小高度
+$minWidth: 1200px; // 最小宽度
+
+@mixin wh($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+@mixin fc($font, $color) {
+  font-size: $font;
+  color: $color;
+}
+
+@mixin setBorder($w, $color, $type: solid) {
+  border: $w $color $type;
+}
+
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin hide-text {
+    overflow: hidden;
+    text-indent: -9000px;
+    display: block;
+}
+
+@mixin line-height($heightValue: 12) {
+    line-height: $heightValue + px;
+    line-height: (0.125 * $heightValue) + rem;
+}
+
+@function black($opacity) {
+    @return rgba(0, 0, 0, $opacity);
+}
+
+
+
+@function white($opacity) {
+    @return rgba(255, 255, 255, $opacity);
+}
+
+@mixin clearfix {
+  &:after {
+      clear: both;
+      content: '.';
+      display: block;
+      height: 0;
+      line-height: 0;
+      overflow: hidden;
+  }
+  *height: 1%;
+}
+
+
+.flexCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;
+}
+
+.ab{
+  position: absolute;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.borderBox{
+  box-sizing: border-box;
+}
+
+.relative{
+  position: relative;
+}
+
+.ell{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

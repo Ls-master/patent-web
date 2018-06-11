@@ -1,23 +1,38 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <div class="app-left">
+      <left-menu />
+    </div>
+
+    <div class="app-right">
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
+import LeftMenu from './components/LeftMenu.vue';
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    LeftMenu
+  }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "./style/index.scss";
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  display: flex;
+  .app-left {
+    width: 200px;
+    height: 100%;
+  }
+  .app-right {
+    flex: 1;
+  }
 }
 </style>
