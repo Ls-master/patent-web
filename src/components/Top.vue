@@ -8,11 +8,13 @@
       <!-- <span> 案号: </span> -->
       <el-input v-model="casenumber" placeholder="请输入案号"></el-input>
     </div>
-    <el-button type="primary">导出 word</el-button>
+    <el-button type="primary" @click="exportData">导出 word</el-button>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -21,7 +23,27 @@ export default {
     }
   },
   methods: {
-
+    ...mapMutations('pages',['setTopdata']),
+    exportData() {
+      console.log(this.getDataJson);
+    }
+  },
+  computed: {
+    ...mapGetters("pages", ["getDataJson"])
+  },
+  watch: {
+    typenumber(v) {
+      this.setTopdata({
+        typenumber: this.typenumber,
+        casenumber: this.casenumber
+      })
+    },
+    casenumber(v) {
+      this.setTopdata({
+        typenumber: this.typenumber,
+        casenumber: this.casenumber
+      })
+    }
   }
 }
 </script>

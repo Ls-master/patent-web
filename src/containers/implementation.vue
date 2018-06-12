@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -94,6 +96,15 @@ export default {
         address: '上海市普陀区金沙江路 1518 弄'
       }]
     }
+  },
+  methods: {
+
+  },
+  computed: {
+    ...mapGetters("pages", ["getDataJson"])
+  },
+  mounted() {
+    
   }
 }
 </script>

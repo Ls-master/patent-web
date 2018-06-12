@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -45,8 +46,21 @@ export default {
       kr.array.forDel(this.dataList, this.checkList);
       this.checkList = [];
     },
-
-  }
+    ...mapMutations('pages',['setClaim']),
+  },
+  computed: {
+    ...mapGetters("pages", ["getDataJson"])
+  },
+  watch: {
+    dataList: {
+      deep: true,
+      handler (v) {
+        this.setClaim({
+          dataList: v
+        })
+      }
+    },
+  },
 }
 </script>
 

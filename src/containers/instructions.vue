@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -37,6 +39,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations('pages',['setInstructions']),
     submitUpload() {
       this.$refs.upload.submit();
     },
@@ -58,7 +61,10 @@ export default {
       console.log(file);
       console.log(fileList);
     }
-  }
+  },
+  computed: {
+    ...mapGetters("pages", ["getDataJson"])
+  },
 }
 </script>
 
