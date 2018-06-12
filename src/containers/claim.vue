@@ -48,8 +48,11 @@ export default {
     },
     ...mapMutations('pages',['setClaim']),
   },
+  mounted(){
+    this.dataList = this.getDataJson.claim.dataList;
+  },
   computed: {
-    ...mapGetters("pages", ["getDataJson"])
+    ...mapGetters("pages", ["getDataJson"]),
   },
   watch: {
     dataList: {
