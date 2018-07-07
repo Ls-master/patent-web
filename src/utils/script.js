@@ -1,17 +1,15 @@
+// @flow
 export default {
-  clone(v) {
-    return JSON.parse(JSON.stringify(v))
-  },
-  getType(v) {
+  getType(v: any): string {
     return Object.prototype.toString.call(v)
   },
-  toKebab(v) {
+  toKebab(v: string): string {
     return v.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
   },
-  isArray(v) {
-    return getType(v) === '[object Array]'
+  isArray(v: any): boolean {
+    return this.getType(v) === '[object Array]'
   },
-  isObject(v) {
-    return getType(v) === '[object Object]'
+  isObject(v: any): boolean {
+    return this.getType(v) === '[object Object]'
   }
 }
