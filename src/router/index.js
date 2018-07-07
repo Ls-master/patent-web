@@ -12,29 +12,37 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'Home',
+    //   component: HelloWorld
+    // },
     {
       path: '/',
       name: 'Home',
-      component: Home
-    },
-    {
-      path: '/main',
-      name: 'main',
-      component: main,
+      component: Home,
       children: [
         {
+          path: '',
+          name: 'main',
+          component: main
+        },
+        { 
+          // 权利要求书
           path: 'claim',
-          name: '权利要求书',
+          name: 'claim',
           component: claim
         },
         {
+          // 具体实施方式
           path: 'implementation',
-          name: '具体实施方式',
+          name: 'implementation',
           component: implementation
         },
         {
+          // 说明书附图
           path: 'instructions',
-          name: '说明书附图',
+          name: 'instructions',
           component: instructions
         }
       ]

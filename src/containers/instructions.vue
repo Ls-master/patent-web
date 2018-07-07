@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="containers-instructions">
-    <div class="instructions-title">
+    <div class="instructions-title" v-if="!readonly">
       说明书附图
     </div>
-    <div class="instructions-content">
+    <div class="instructions-content" v-if="!readonly">
       <el-button style="margin: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
       <el-upload
         class="upload"
@@ -24,6 +24,10 @@
         <img width="100%" :src="dialogImageUrl" alt="">
       </el-dialog>
     </div>
+    <!-- 查看 -->
+    <div  v-if="readonly">
+      <img width="100%" v-for="(file, index) in fileList" :src="file.url" >
+    </div>
   </div>
 </template>
 
@@ -31,6 +35,12 @@
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
+  props: {
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       dialogImageUrl: '',
@@ -44,32 +54,42 @@ export default {
       this.$refs.upload.submit();
     },
     handleRemove(file, fileList) {
-      console.log(file, fileList);
+      this.fileList = fileList;
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
     handleChange(file, fileList) {
-      console.log(fileList);
+      this.fileList = fileList;
     },
     beforeUpload(file) {
       console.log(file);
     },
     handleSuccess(response, file, fileList) {
-      console.log(response);
-      console.log(file);
-      console.log(fileList);
+      this.fileList = fileList;
     }
   },
   computed: {
     ...mapGetters("pages", ["getDataJson"])
   },
+  mounted() {
+    this.fileList = this.getDataJson.instructions;
+  },
+  watch: {
+    fileList: {
+      deep: true,
+      handler (v) {
+        this.setInstructions(v)
+      }
+    },
+  }
 }
 </script>
 
 <style lang="scss">
   .containers-instructions {
+    padding: 10px;
     height: 100%;
     .instructions-title {
       margin-bottom: 10px;

@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="containers-claim">
-    <div class="claim-top">
+    <div class="claim-top" v-if="!readonly">
       <el-button type="primary" @click="addAlone">增加独立权利要求</el-button>
-      <el-button type="primary">增加从属权利要求</el-button>
+      <el-button type="primary" @click="addSub">增加从属权利要求</el-button>
       <el-button type="danger" @click="delData">删除</el-button>
     </div>
     <div class="claim-content">
@@ -12,11 +12,12 @@
             <div style="width: 500px">
               {{item.label}}
               <el-input
+                :readonly="readonly"
                 class="list-item"
                 type="textarea"
                 :rows="3"
                 placeholder="一种发明名称,其特征是..."
-                v-model="item.value">
+                v-model="item.claim">
               </el-input>
             </div>
           </el-checkbox>
@@ -29,27 +30,44 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
 export default {
+  props: {
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       checkList: [],
-      dataList: []
+      dataList: [],
+      
     }
   },
   methods: {
     addAlone() {
       this.dataList.push({
-        label: this.dataList.length+1,
-        value: ''
+        label: this.dataList.length + 1,
+        claim: '一种 <发明名称> , 其特征是...',
+        fun: '',
+        effect: ''
+      })
+    },
+    addSub() {
+      this.dataList.push({
+        label: this.dataList.length + 1,
+        claim: '一种 <从属权利> , 其特征是...',
+        fun: '',
+        effect: ''
       })
     },
     delData() {
       kr.array.forDel(this.dataList, this.checkList);
       this.checkList = [];
     },
-    ...mapMutations('pages',['setClaim']),
+    ...mapMutations('pages',['setImplementation']),
   },
   mounted(){
-    this.dataList = this.getDataJson.claim.dataList;
+    this.dataList = this.getDataJson.implementation;
   },
   computed: {
     ...mapGetters("pages", ["getDataJson"]),
@@ -58,9 +76,7 @@ export default {
     dataList: {
       deep: true,
       handler (v) {
-        this.setClaim({
-          dataList: v
-        })
+        this.setImplementation(v)
       }
     },
   },
@@ -69,6 +85,7 @@ export default {
 
 <style lang="scss">
   .containers-claim {
+    padding: 10px;
     .claim-top {
       margin-bottom: 20px;
     }

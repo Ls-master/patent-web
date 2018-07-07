@@ -13,6 +13,8 @@ import ElementUI from 'element-ui'
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 
+Vue.prototype.$_ = _;
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

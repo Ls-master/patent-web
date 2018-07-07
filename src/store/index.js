@@ -5,7 +5,19 @@ Vue.use(Vuex);
 import pages from './pages';
 
 export default new Vuex.Store({
-    modules: {
-      pages,
-    },
+  namespaced: true,
+  state: {
+    comps: ['', '', '', '']
+  },
+  mutations: {
+    setComps(state, obj) {
+      state.comps.splice(obj.i, 1, obj.val);
+    }
+  },
+  getters: {
+    getComps: (state, getters) => state.comps
+  },
+  modules: {
+    pages,
+  },
 });

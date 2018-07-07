@@ -7,18 +7,29 @@ export default {
         typenumber: '',
         casenumber: ''
       },
-      claim: {
-        dataList: []
-      },
-      instructions: {}
+      // claim: {
+      //   dataList: []
+      // },
+      implementation: [
+        // {
+        //   label: 0,
+        //   claim: '',
+        //   fun: '',
+        //   effect: ''
+        // }
+      ],
+      instructions: []
     }
   },
   mutations: {
     setTopdata(state, val) {
       state.dataJson.topdata = val;
     },
-    setClaim(state, val) {
-      state.dataJson.claim = val;
+    // setClaim(state, val) {
+    //   state.dataJson.claim = val;
+    // },
+    setImplementation(state, val) {
+      state.dataJson.implementation = val;
     },
     setInstructions(state, val) {
       state.dataJson.instructions = val;

@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="containers-implementation">
-    <div class="imp-title">
+    <!-- <div class="imp-title">
       具体实施方法
-    </div>
+    </div> -->
     <div class="imp-table">
       <el-table
         :data="tableData"
@@ -14,18 +14,36 @@
           width="50">
         </el-table-column>
         <el-table-column
-          prop="date"
+          prop="claim"
           label="手段"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="fun"
           label="功能"
           width="180">
+          <template slot-scope="scope">
+            <el-input
+              :readonly="readonly"
+              type="textarea"
+              :rows="3"
+              placeholder="请输入功能"
+              v-model="scope.row.fun">
+            </el-input>
+          </template>
         </el-table-column>
         <el-table-column
-          prop="address"
+          prop="effect"
           label="效果">
+          <template slot-scope="scope">
+            <el-input
+              :readonly="readonly"
+              type="textarea"
+              :rows="3"
+              placeholder="请输入效果"
+              v-model="scope.row.effect">
+            </el-input>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -36,81 +54,40 @@
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
+  props: {
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
-      tableData: [{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-08',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-06',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-07',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      },{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-08',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-06',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-07',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }]
+      tableData: []
     }
   },
   methods: {
-
+    ...mapMutations('pages',['setImplementation']),
   },
   computed: {
     ...mapGetters("pages", ["getDataJson"])
   },
   mounted() {
-    
-  }
+    this.tableData = this.getDataJson.implementation;
+  },
+  watch: {
+    tableData: {
+      deep: true,
+      handler (v) {
+        this.setImplementation(v)
+      }
+    },
+  },
 }
 </script>
 
 <style lang="scss">
   .containers-implementation {
+    padding: 10px;
     height: 100%;
     .imp-title {
       margin-bottom: 20px;
