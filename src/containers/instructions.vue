@@ -2,6 +2,7 @@
   <div class="containers-instructions">
     <div class="instructions-title" v-if="!readonly">
       说明书附图
+      <el-button type="danger" @click="() => {this.$router.push({path: '/'})}" style="float: right"> 返回</el-button>
     </div>
     <div class="instructions-content" v-if="!readonly">
       <el-button style="margin: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
@@ -26,6 +27,10 @@
     </div>
     <!-- 查看 -->
     <div  v-if="readonly">
+      <div v-show="!fileList.length">
+        暂无图片, 
+        <router-link to="/instructions">请添加...</router-link>
+      </div>
       <img width="100%" v-for="(file, index) in fileList" :src="file.url" >
     </div>
   </div>

@@ -4,6 +4,8 @@
       <el-button type="primary" @click="addAlone">增加独立权利要求</el-button>
       <el-button type="primary" @click="addSub">增加从属权利要求</el-button>
       <el-button type="danger" @click="delData">删除</el-button>
+      
+      <el-button type="danger" @click="() => {this.$router.push({path: '/'})}" style="float: right"> 返回</el-button>
     </div>
     <div class="claim-content">
       <el-checkbox-group v-model="checkList" @change="">
@@ -87,6 +89,7 @@ export default {
   .containers-claim {
     padding: 10px;
     .claim-top {
+      width: 100%;
       margin-bottom: 20px;
     }
     .claim-content {

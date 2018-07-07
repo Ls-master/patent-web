@@ -1,8 +1,9 @@
 <template lang="html">
   <div class="containers-implementation">
-    <!-- <div class="imp-title">
+    <div class="imp-title" v-if="!readonly">
       具体实施方法
-    </div> -->
+      <el-button type="danger" @click="() => {this.$router.push({path: '/'})}" style="float: right"> 返回</el-button>
+    </div>
     <div class="imp-table">
       <el-table
         :data="tableData"
