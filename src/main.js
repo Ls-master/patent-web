@@ -6,7 +6,7 @@ import router from './router'
 import store from './store';
 import './utils';
 import 'normalize.css';
-
+import axios from 'axios';
 import _ from 'lodash';
 import ElementUI from 'element-ui'
 

@@ -14,4 +14,5 @@ export default {
   isObject(v) {
     return getType(v) === '[object Object]'
   }
+  
 }

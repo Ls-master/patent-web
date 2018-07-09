@@ -6,10 +6,11 @@
     </div>
     <div class="instructions-content" v-if="!readonly">
       <el-button style="margin: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+      <!-- action="https://jsonplaceholder.typicode.com/posts/" -->
       <el-upload
         class="upload"
         ref="upload"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="http://localhost:50090/send/v2"
         list-type="picture-card"
         :file-list="fileList"
         :on-preview="handlePictureCardPreview"
@@ -66,6 +67,8 @@ export default {
       this.dialogVisible = true;
     },
     handleChange(file, fileList) {
+      console.log(fileList);
+      // console.log(window.URL.createObjectURL);
       this.fileList = fileList;
     },
     beforeUpload(file) {

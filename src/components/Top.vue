@@ -2,7 +2,7 @@
   <div class="comp-top">
     <div class="top-item">
       <!-- <span> 种类: </span> -->
-      <el-input v-model="typenumber" placeholder="请输入种类数量"></el-input>
+      <el-input v-model="typenumber" placeholder="请输入发明名称"></el-input>
     </div>
     <div class="top-item">
       <!-- <span> 案号: </span> -->
@@ -26,6 +26,13 @@ export default {
     ...mapMutations('pages',['setTopdata']),
     exportData() {
       console.log(this.getDataJson);
+      axios.post('http://localhost:50090/send/v1', this.getDataJson)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   computed: {

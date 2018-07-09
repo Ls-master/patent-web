@@ -8,10 +8,10 @@
       <el-button type="danger" @click="() => {this.$router.push({path: '/'})}" style="float: right"> 返回</el-button>
     </div>
     <div class="claim-content">
-      <el-checkbox-group v-model="checkList" @change="">
+      <el-checkbox-group v-model="checkList" @change="" class="claim-check">
         <div v-for="(item, index) in dataList" :label="index" :key="index">
           <el-checkbox :label="index" >
-            <div style="width: 500px">
+            <div style="width: 100%">
               {{item.label}}
               <el-input
                 :readonly="readonly"
@@ -42,7 +42,6 @@ export default {
     return {
       checkList: [],
       dataList: [],
-      
     }
   },
   methods: {
@@ -50,16 +49,20 @@ export default {
       this.dataList.push({
         label: this.dataList.length + 1,
         claim: '一种 <发明名称> , 其特征是...',
+        claim_reg: '',
         fun: '',
-        effect: ''
+        effect: '',
+        type: 'alone'
       })
     },
     addSub() {
       this.dataList.push({
         label: this.dataList.length + 1,
         claim: '一种 <从属权利> , 其特征是...',
+        claim_reg: '',
         fun: '',
-        effect: ''
+        effect: '',
+        type: 'sub'
       })
     },
     delData() {
@@ -78,7 +81,17 @@ export default {
     dataList: {
       deep: true,
       handler (v) {
-        this.setImplementation(v)
+        let arr = v.map(item => {
+          return {
+            label: item.label,
+            claim: item.claim,
+            claim_reg: item.claim.replace(/其特征是|所述|根据权利要求|所述的/g, ''),
+            fun: item.fun,
+            effect: item.effect,
+            type: item.type
+          }
+        });
+        this.setImplementation(arr)
       }
     },
   },
@@ -89,6 +102,7 @@ export default {
   .containers-claim {
     padding: 10px;
     .claim-top {
+      min-width: 550px;
       width: 100%;
       margin-bottom: 20px;
     }

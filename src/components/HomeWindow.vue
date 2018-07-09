@@ -9,7 +9,7 @@
     </el-dropdown>
 
     <el-dropdown @command="(command) => handleCommand(command, 'implementation')" class="window-top" split-button type="primary" size="small">
-      具体实施方案
+      具体实施方式
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="edit">编辑</el-dropdown-item>
         <el-dropdown-item command="check">查看</el-dropdown-item>
@@ -85,6 +85,7 @@ export default {
     border: 1px solid #000;
     height: 400px;
     padding: 10px;
+    // min-width: 525px;
     .window-top {
       margin: 0px 15px 10px 15px;
     }

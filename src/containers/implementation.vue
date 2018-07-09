@@ -15,14 +15,14 @@
           width="50">
         </el-table-column>
         <el-table-column
-          prop="claim"
+          prop="claim_reg"
           label="手段"
-          width="180">
+          >
         </el-table-column>
         <el-table-column
           prop="fun"
           label="功能"
-          width="180">
+          >
           <template slot-scope="scope">
             <el-input
               :readonly="readonly"

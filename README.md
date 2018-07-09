@@ -14,8 +14,10 @@ A library of patent for vue build by teacher-ZHANG !!!
       {
         label: 0,   // 行编号
         claim: '',  // 权利要求说明书
+        claim_reg: '',  // 正则匹配后的 claim
         fun: '',    // 功能
-        effect: ''  // 效果
+        effect: '',  // 效果
+        type: ''    // 添加类型, 独立(alone)/从属(sub)
       }
     ],
     // 说明书附图, 上传图片相关参数

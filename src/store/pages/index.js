@@ -14,8 +14,10 @@ export default {
         // {
         //   label: 0,
         //   claim: '',
+        //   claim_reg: '',
         //   fun: '',
-        //   effect: ''
+        //   effect: '',
+        //   type: '', alone/sub
         // }
       ],
       instructions: []
