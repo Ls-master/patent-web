@@ -45,12 +45,9 @@ export default {
 <style lang="scss">
 .container-main {
   .main-content {
-    .el-row {
-    }
     .el-col {
       margin-top: 20px;
     }
-    
   }
 }
 </style>

@@ -5,7 +5,28 @@
       <el-button type="danger" @click="() => {this.$router.push({path: '/'})}" style="float: right"> 返回</el-button>
     </div>
     <div class="instructions-content" v-if="!readonly">
-      <input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="handleChange"/>
+      <el-button style="margin: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+      <!-- action="https://jsonplaceholder.typicode.com/posts/" -->
+      <el-upload
+        class="upload"
+        ref="upload"
+        action="http://localhost:50090/send/v2"
+        :http-request="handleUpload"
+        :headers="headers"
+        list-type="picture-card"
+        :file-list="fileList"
+        :on-preview="handlePictureCardPreview"
+        :on-remove="handleRemove"
+        :on-change="handleChange"
+        :before-upload="beforeUpload"
+        :on-success="handleSuccess"
+        :auto-upload="false">
+        <i class="el-icon-plus"></i>
+        <!-- <el-button slot="trigger" size="small" type="primary">选取文件</el-button> -->
+      </el-upload>
+      <el-dialog :visible.sync="dialogVisible">
+        <img width="100%" :src="dialogImageUrl" alt="">
+      </el-dialog>
     </div>
     <!-- 查看 -->
     <div  v-if="readonly">
@@ -33,7 +54,8 @@ export default {
     return {
       dialogImageUrl: '',
       dialogVisible: false,
-      fileList: []
+      fileList: [],
+      headers: {"Content-Type": 'multipart/form-data'}
     };
   },
   methods: {
@@ -48,10 +70,21 @@ export default {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
-    handleChange(e) {
-      let file = e.target.files[0];           
+    handleChange(file, fileList) {
+      console.log(file.url);
+      this.fileList = fileList;
+    },
+    beforeUpload(file) {
+      console.log(file);
+    },
+    handleSuccess(response, file, fileList) {
+      this.fileList = fileList;
+    },
+    handleUpload(data) {
+      
       let param = new FormData(); //创建form对象
-      param.append('file',file,file.name);//通过append向form对象添加数据
+
+      param.append('file', data.file);//通过append向form对象添加数据
       param.append('chunk','0');//添加form表单中其他数据
       console.log(param.get('file')); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
       let config = {
@@ -60,13 +93,7 @@ export default {
       axios.post('http://localhost:50090/send/v2', param, config)
       .then(response=>{
         console.log(response.data);
-      })        
-    },
-    beforeUpload(file) {
-      console.log(file);
-    },
-    handleSuccess(response, file, fileList) {
-      this.fileList = fileList;
+      }) 
     }
   },
   computed: {
