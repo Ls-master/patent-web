@@ -14,6 +14,7 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import axios from 'axios';
 
 export default {
   data() {
@@ -26,6 +27,16 @@ export default {
     ...mapMutations('pages',['setTopdata']),
     exportData() {
       console.log(this.getDataJson);
+      // axios({
+      //   method: 'post',
+      //   baseURL: '/api',
+      //   url: 'send/v1',
+      //   data: this.getDataJson
+      // }).then(res => {
+      //   console.log(res);
+      // }).catch(err => {
+      //   console.log(err);
+      // });
       axios.post('http://localhost:50090/send/v1', this.getDataJson)
         .then(res => {
           console.log(res);
