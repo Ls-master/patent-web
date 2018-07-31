@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapState } from "vuex";
 import axios from 'axios';
 
 export default {
@@ -47,7 +47,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("pages", ["getDataJson"])
+    ...mapGetters("pages", ["getDataJson"]),
   },
   watch: {
     typenumber(v) {
@@ -62,6 +62,10 @@ export default {
         casenumber: this.casenumber
       })
     }
+  },
+  mounted() {
+    this.typenumber = this.getDataJson.topdata.typenumber;
+    this.casenumber = this.getDataJson.topdata.casenumber;
   }
 }
 </script>

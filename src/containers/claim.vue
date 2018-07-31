@@ -13,8 +13,8 @@
           <el-checkbox :label="index" >
             <div style="width: 100%">
               {{item.label}}
+                <!-- :readonly="readonly" -->
               <el-input
-                :readonly="readonly"
                 class="list-item"
                 type="textarea"
                 :rows="3"
@@ -48,7 +48,8 @@ export default {
     addAlone() {
       this.dataList.push({
         label: this.dataList.length + 1,
-        claim: '一种 <发明名称> , 其特征是...',
+        // claim: '一种 <发明名称> , 其特征在于...',
+        claim: `一种 ${this.getDataJson.topdata.typenumber ? this.getDataJson.topdata.typenumber : '<发明名称>'}, 其特征在于...`,
         claim_reg: '',
         fun: '',
         effect: '',
@@ -58,7 +59,8 @@ export default {
     addSub() {
       this.dataList.push({
         label: this.dataList.length + 1,
-        claim: '一种 <从属权利> , 其特征是...',
+        // claim: '一种 <从属权利> , 其特征在于...',
+        claim: `一种 ${this.getDataJson.topdata.typenumber ? this.getDataJson.topdata.typenumber : '<从属权利>'}, 其特征在于...`,
         claim_reg: '',
         fun: '',
         effect: '',
@@ -85,7 +87,7 @@ export default {
           return {
             label: item.label,
             claim: item.claim,
-            claim_reg: item.claim.replace(/其特征是|所述|根据权利要求|所述的/g, ''),
+            claim_reg: item.claim.replace(/其特征在于|()|所述/g, ''),
             fun: item.fun,
             effect: item.effect,
             type: item.type

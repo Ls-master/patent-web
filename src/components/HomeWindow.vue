@@ -1,7 +1,7 @@
 <template>
   <div class="content-window">
     <el-dropdown @command="(command) => handleCommand(command, 'claim')" class="window-top" split-button type="primary" size="small">
-      权利要求说明书
+      权利要求书
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="edit">编辑</el-dropdown-item>
         <el-dropdown-item command="check">查看</el-dropdown-item>

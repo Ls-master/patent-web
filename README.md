@@ -6,7 +6,7 @@ A library of patent for vue build by teacher-ZHANG !!!
   dataJson: {
     // 页面顶部数据
     topdata: {
-      typenumber: '', // 种类数量
+      typenumber: '', // 发明名称
       casenumber: ''  // 案号
     },
     // 具体实施方案 列表数据

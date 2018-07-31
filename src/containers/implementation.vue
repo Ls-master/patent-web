@@ -24,8 +24,8 @@
           label="功能"
           >
           <template slot-scope="scope">
+              <!-- :readonly="readonly" -->
             <el-input
-              :readonly="readonly"
               type="textarea"
               :rows="3"
               placeholder="请输入功能"
@@ -37,8 +37,8 @@
           prop="effect"
           label="效果">
           <template slot-scope="scope">
+              <!-- :readonly="readonly" -->
             <el-input
-              :readonly="readonly"
               type="textarea"
               :rows="3"
               placeholder="请输入效果"
@@ -73,7 +73,7 @@ export default {
     ...mapGetters("pages", ["getDataJson"])
   },
   mounted() {
-    this.tableData = this.getDataJson.implementation;
+    // this.tableData = this.getDataJson.implementation;
   },
   watch: {
     tableData: {
@@ -82,6 +82,13 @@ export default {
         this.setImplementation(v)
       }
     },
+    getDataJson: {
+      immediate: true,
+      deep: true,
+      handler(v) {
+        this.tableData = v.implementation;
+      }
+    }
   },
 }
 </script>
