@@ -80,6 +80,13 @@ export default {
     ...mapGetters("pages", ["getDataJson"]),
   },
   watch: {
+    // getDataJson: {
+    //   immediate: true,
+    //   deep: true,
+    //   handler(v) {
+    //     this.dataList = this.getDataJson.implementation;
+    //   }
+    // },
     dataList: {
       deep: true,
       handler (v) {

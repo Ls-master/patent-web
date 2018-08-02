@@ -6,6 +6,7 @@
     </div>
     <div class="imp-table">
       <el-table
+        v-if="!readonly"
         :data="tableData"
         height="100%"
         border
@@ -47,6 +48,40 @@
           </template>
         </el-table-column>
       </el-table>
+
+      <div v-for="(item, i) in tableData" :key="i" v-if="readonly" class="img-check">
+        <div class="left">
+          {{i+1}}
+        </div>
+        <div class="right">
+          <div class="child">
+            <el-input
+              type="textarea"
+              :rows="3"
+              :readonly="true"
+              v-model="item.claim_reg">
+            </el-input>
+          </div >
+          <!-- <p><b>功能:</b> {{item.fun}}</p> -->
+          <div class="child"> 
+            <el-input
+              type="textarea"
+              :rows="3"
+              placeholder="请输入功能"
+              v-model="item.fun">
+            </el-input>
+          </div>
+          <!-- <p><b>效果:</b> {{item.effect}}</p> -->
+          <div class="child"> 
+            <el-input
+              type="textarea"
+              :rows="3"
+              placeholder="请输入效果"
+              v-model="item.effect">
+            </el-input>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -79,7 +114,9 @@ export default {
     tableData: {
       deep: true,
       handler (v) {
-        this.setImplementation(v)
+        this.setImplementation(v);
+        console.log(3333);
+        
       }
     },
     getDataJson: {
@@ -103,6 +140,22 @@ export default {
     }
     .imp-table {
       height: calc(100% - 40px);
+    }
+    .img-check {
+      display: flex;
+      border-bottom: 1px solid #CACEE0;
+        margin-bottom: 10px;
+      .left {
+        width: 25px;
+        margin-top: 15px;
+        color: red;
+      }
+      .right {
+        flex: 1;
+        .child {
+          margin-bottom: 10px;
+        }
+      }
     }
   }
 </style>
