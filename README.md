@@ -9,6 +9,14 @@ A library of patent for vue build by teacher-ZHANG !!!
       typenumber: '', // 发明名称
       casenumber: ''  // 案号
     },
+    // 技术背景 列表数据
+    technical: [
+      {
+        number: 0,  // 技术文献编号
+        message: '',  // 现有技术公开内容
+        defect: ''   // 缺陷
+      }
+    ],
     // 具体实施方案 列表数据
     implementation: [
       {

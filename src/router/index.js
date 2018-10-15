@@ -4,6 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 
 import Home from '@/containers/home'
 import main from '@/containers/main'
+
+import technical from '@/containers/technical'
 import claim from '@/containers/claim'
 import implementation from '@/containers/implementation'
 import instructions from '@/containers/instructions'
@@ -26,6 +28,11 @@ export default new Router({
           path: '',
           name: 'main',
           component: main
+        },
+        {
+          path: 'technical',
+          name: 'technical',
+          component: technical
         },
         { 
           // 权利要求书

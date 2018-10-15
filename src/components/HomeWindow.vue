@@ -1,5 +1,13 @@
 <template>
   <div class="content-window">
+    <el-dropdown @command="(command) => handleCommand(command, 'technical')" class="window-top" split-button type="primary" size="small">
+      技术背景
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item command="edit">编辑</el-dropdown-item>
+        <el-dropdown-item command="check">查看</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+
     <el-dropdown @command="(command) => handleCommand(command, 'claim')" class="window-top" split-button type="primary" size="small">
       权利要求书
       <el-dropdown-menu slot="dropdown">
@@ -87,7 +95,7 @@ export default {
     padding: 10px;
     // min-width: 525px;
     .window-top {
-      margin: 0px 15px 10px 15px;
+      margin: 0px 0px 10px 5px;
     }
     .window-content {
       width: 100%;

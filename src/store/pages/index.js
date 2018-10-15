@@ -7,6 +7,13 @@ export default {
         typenumber: '',
         casenumber: ''
       },
+      technical: [
+        // {
+        //   number: 0,
+        //   message: '',
+        //   defect: ''
+        // }
+      ],
       // claim: {
       //   dataList: []
       // },
@@ -26,6 +33,9 @@ export default {
   mutations: {
     setTopdata(state, val) {
       state.dataJson.topdata = val;
+    },
+    setTechnical(state, val) {
+      state.dataJson.technical = val;
     },
     // setClaim(state, val) {
     //   state.dataJson.claim = val;

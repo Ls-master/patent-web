@@ -1,19 +1,32 @@
 <template lang="html">
   <div class="containers-claim">
-    <div class="claim-top" v-if="!readonly">
+    <div class="claim-top" >
       <el-button type="primary" @click="addAlone">增加独立权利要求</el-button>
       <el-button type="primary" @click="addSub">增加从属权利要求</el-button>
       <el-button type="danger" @click="delData">删除</el-button>
       
-      <el-button type="danger" @click="() => {this.$router.push({path: '/'})}" style="float: right"> 返回</el-button>
+      <el-button type="danger" @click="() => {this.$router.push({path: '/'})}" style="float: right" v-if="!readonly"> 返回</el-button>
     </div>
     <div class="claim-content">
       <el-checkbox-group v-model="checkList" @change="" class="claim-check">
         <div v-for="(item, index) in dataList" :label="index" :key="index">
-          <el-checkbox :label="index" >
+          <!-- 独立权利要求 -->
+          <el-checkbox :label="index" v-if="item.type === 'alone'">
             <div style="width: 100%">
               {{item.label}}
-                <!-- :readonly="readonly" -->
+              <el-input
+                class="list-item"
+                type="textarea"
+                :rows="3"
+                placeholder="一种发明名称,其特征是..."
+                v-model="item.claim">
+              </el-input>
+            </div>
+          </el-checkbox>
+          <!-- 从属权利要求 -->
+          <el-checkbox :label="index+1" v-if="item.type === 'sub'" >
+            <div style="width: 100%" >
+              {{item.label}}
               <el-input
                 class="list-item"
                 type="textarea"
@@ -49,7 +62,7 @@ export default {
       this.dataList.push({
         label: this.dataList.length + 1,
         // claim: '一种 <发明名称> , 其特征在于...',
-        claim: `一种 ${this.getDataJson.topdata.typenumber ? this.getDataJson.topdata.typenumber : '<发明名称>'}, 其特征在于...`,
+        claim: `一种${this.getDataJson.topdata.typenumber ? this.getDataJson.topdata.typenumber : '<发明名称>'}， 其特征在于，`,
         claim_reg: '',
         fun: '',
         effect: '',
@@ -57,10 +70,14 @@ export default {
       })
     },
     addSub() {
+      let arr = this.checkList.map(n => {
+        return this.dataList[n].label
+      });
       this.dataList.push({
         label: this.dataList.length + 1,
         // claim: '一种 <从属权利> , 其特征在于...',
-        claim: `一种 ${this.getDataJson.topdata.typenumber ? this.getDataJson.topdata.typenumber : '<从属权利>'}, 其特征在于...`,
+        // claim: `一种${this.getDataJson.topdata.typenumber ? this.getDataJson.topdata.typenumber : '<从属权利>'}， 其特征在于，`,
+        claim: `如权利要求${arr.sort().toString()}所述的${this.subName}，其特征在于，`,
         claim_reg: '',
         fun: '',
         effect: '',
@@ -78,6 +95,17 @@ export default {
   },
   computed: {
     ...mapGetters("pages", ["getDataJson"]),
+    subName() {
+      if(this.checkList.length) {
+        let num = this.checkList[0];
+        var regex=/(.+?)\，/; // 正则匹配 ','前的字符
+        let result = regex.exec(this.dataList[num+1].claim);
+        if (result !== null) {
+          return result[1];
+        }
+      } 
+      return '';
+    }
   },
   watch: {
     // getDataJson: {

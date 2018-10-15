@@ -2,6 +2,9 @@
   <div class="containers-implementation">
     <div class="imp-title" v-if="!readonly">
       具体实施方法
+
+      <!-- <el-button @click="() => {this.$router.push({path: '/'})}" >增加具体实施方式</el-button> -->
+      <!-- <el-button @click="() => {this.$router.push({path: '/'})}" >删除</el-button> -->
       <el-button type="danger" @click="() => {this.$router.push({path: '/'})}" style="float: right"> 返回</el-button>
     </div>
     <div class="imp-table">
@@ -10,9 +13,10 @@
         :data="tableData"
         height="100%"
         border
-        style="width: 100%">
+        style="width: 100%"
+        @selection-change="handleSelectionChange">
         <el-table-column
-          type="index"
+          type="selection"
           width="50">
         </el-table-column>
         <el-table-column
@@ -103,6 +107,10 @@ export default {
   },
   methods: {
     ...mapMutations('pages',['setImplementation']),
+    handleSelectionChange(rows) {
+      console.log(rows);
+      
+    },
   },
   computed: {
     ...mapGetters("pages", ["getDataJson"])
@@ -115,8 +123,6 @@ export default {
       deep: true,
       handler (v) {
         this.setImplementation(v);
-        console.log(3333);
-        
       }
     },
     getDataJson: {
